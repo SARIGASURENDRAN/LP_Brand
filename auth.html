@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- LivePerson Monitor Script -->
+    <script type="text/javascript">
+        window.lpTag = window.lpTag || {}, 'undefined' == typeof window.lpTag._tagCount ? (
+    window.lpTag = {
+        site: '66751472' || '',
+        section: lpTag.section || '',
+        autoStart: lpTag.autoStart !== !1,
+        ovr: lpTag.ovr || {},
+        _v: '1.10.0',
+        _tagCount: 1,
+        protocol: 'https:',
+        events: {
+            bind: function(t, e, i) { lpTag.defer(function() { lpTag.events.bind(t, e, i) }, 0) },
+            trigger: function(t, e, i) { lpTag.defer(function() { lpTag.events.trigger(t, e, i) }, 1) }
+        },
+        defer: function(t, e) {
+            0 === e ? (this._defB = this._defB || [], this._defB.push(t)) :
+            1 === e ? (this._defT = this._defT || [], this._defT.push(t)) :
+            (this._defL = this._defL || [], this._defL.push(t))
+        },
+        init: function() {
+            this.load()
+        },
+        start: function() {
+            this.autoStart = !0
+        },
+        load: function(t, e, i) {
+            var n = this;
+            setTimeout(function() { n._load(t, e, i) }, 0)
+        },
+        _load: function(t, e, i) {
+            var n = t;
+            t || (n = this.protocol + '//' + (this.ovr && this.ovr.domain ? this.ovr.domain : 'lptag.liveperson.net') + '/tag/tag.js?site=' + this.site);
+            var o = document.createElement('script');
+            o.setAttribute('charset', e ? e : 'UTF-8'), i && o.setAttribute('id', i), o.setAttribute('src', n), document.getElementsByTagName('head').item(0).appendChild(o)
+        },
+        identities: [], // Ensure identities array is initialized here
+        sdes: [] // Initialize sdes as an array
+    },
+    lpTag.init()
+) : window.lpTag._tagCount += 1;
+
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jewelry Shop</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Welcome to Our Jewelry Shop</h1>
+    <div id="products">
+        <!-- Products will be added here by JavaScript -->
+    </div>
+    <h2>Cart</h2>
+    <ul id="cart">
+        <!-- Cart items will be listed here -->
+    </ul>
+    <div id="cartTotal">Total Price: $0</div>
+
+    <script src="app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            updateLivePersonCartAndTitle();
+        });
+
+        function updateLivePersonCartAndTitle() {
+            var cartTotal = calculateCartTotal(); // Make sure this function exists and is accessible
+            // Update the cart total display
+            document.getElementById('cartTotal').innerText = 'Total Price: $' + cartTotal.toFixed(2);
+
+            window.lpTag.sdes.push({
+                "type": "cart",
+                "total": cartTotal, 
+                "currency": "USD",
+                "numItems": 3, 
+            });
+
+            const identityFn = function (callback) {
+                callback({
+                    "sub": "1234567890",
+                    "iss": "https://jwt.io/",
+                    "name": "sariga",
+                    "admin": true,
+                    "iat": 1516239022,
+                    "exp": 1714289621,
+                    "aud": "acc:qa57221676",
+                });
+            };
+
+            window.lpTag.identities.push(identityFn);
+
+            var id_token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiaXNzIjoiaHR0cHM6Ly9qd3QuaW8vIiwibmFtZSI6InNhcmlnYSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTYyMzkwMjIsImV4cCI6MTcxNDI4OTYyMSwiYXVkIjoiYWNjOnFhNTcyMjE2NzYifQ.HQ43gXgUTHkPkW6N2RvuPXVRtSviXb6KT5wUklgzR5ZCTY1y8y5sY1jv1fR34s4w2LMImqh0X-UdT_UWqqwTjZvfZosMyvICZ2x0WDSzdMHrLHYpqbXxsHo2yu4gNMRLs3MhSwrdAK4SEsDYEa7EKVUzGAwIxPDBuLQcWEXyk8z77uyHC2NX_yN8yD2bKQI5Gh0RGJ-Emu1pbs41nEJylutQpo7q62UAmm2gAfhBm-USr13FOrHtK1KyPThmGiaQ47GgAQj026pV089_53O1hHkefxLGPTdWmzK-A6F0OOlneSixmX0PjnRRYEPa5wrApu2i-kC9d4Q2k7-QX6MVBw"
+
+            function lpGetAuthenticationToken(callback) {
+                console.log("LP asked for id_token or auth code in Code Flow");
+                callback(id_token);
+            }
+        }
+    </script>
+</body>
+</html>

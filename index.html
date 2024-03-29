@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- LivePerson Monitor Script -->
+    <script type="text/javascript">
+        window.lpTag = window.lpTag || {}, 'undefined' == typeof window.lpTag._tagCount ? (
+            window.lpTag = {
+                site: '66751472' || '',
+                section: lpTag.section || '',
+                autoStart: lpTag.autoStart !== !1,
+                ovr: lpTag.ovr || {},
+                _v: '1.10.0',
+                _tagCount: 1,
+                protocol: 'https:',
+                events: {
+                    bind: function(t, e, i) { lpTag.defer(function() { lpTag.events.bind(t, e, i) }, 0) },
+                    trigger: function(t, e, i) { lpTag.defer(function() { lpTag.events.trigger(t, e, i) }, 1) }
+                },
+                defer: function(t, e) {
+                    0 === e ? (this._defB = this._defB || [], this._defB.push(t)) :
+                    1 === e ? (this._defT = this._defT || [], this._defT.push(t)) :
+                    (this._defL = this._defL || [], this._defL.push(t))
+                },
+                init: function() {
+                    this.load()
+                },
+                start: function() {
+                    this.autoStart = !0
+                },
+                load: function(t, e, i) {
+                    var n = this;
+                    setTimeout(function() { n._load(t, e, i) }, 0)
+                },
+                _load: function(t, e, i) {
+                    var n = t;
+                    t || (n = this.protocol + '//' + (this.ovr && this.ovr.domain ? this.ovr.domain : 'lptag.liveperson.net') + '/tag/tag.js?site=' + this.site);
+                    var o = document.createElement('script');
+                    o.setAttribute('charset', e ? e : 'UTF-8'), i && o.setAttribute('id', i), o.setAttribute('src', n), document.getElementsByTagName('head').item(0).appendChild(o)
+                }
+            },
+            lpTag.init()
+        ) : window.lpTag._tagCount += 1;
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jewelry Shop</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Welcome to Our Jewelry Shop</h1>
+    <div id="products">
+        <!-- Products will be added here by JavaScript -->
+    </div>
+    <h2>Cart</h2>
+    <ul id="cart">
+        <!-- Cart items will be listed here -->
+    </ul>
+    <div id="cartTotal">Total Price: $0</div>
+
+    <script src="app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            updateLivePersonCartAndTitle();
+        });
+
+        // Assume this function is triggered whenever the cart updates.
+        function updateLivePersonCartAndTitle() {
+            var cartTotal = calculateCartTotal(); // Make sure this function exists and is accessible
+            var pageTitle = document.title;
+
+            // Update the cart total display
+            document.getElementById('cartTotal').innerText = 'Total Price: $' + cartTotal.toFixed(2);
+
+            window.lpTag = window.lpTag || {};
+            window.lpTag.sdes = window.lpTag.sdes || [];
+            window.lpTag.sdes.push({
+                "type": "cart", //MANDATORY
+                "total": cartTotal, //TOTAL CART VALUE
+                "currency": "USD", //CURRENCY CODE
+                "numItems": 3, //NUMBER OF ITEMS IN CART
+            });
+        }
+
+        
+    </script>
+</body>
+</html

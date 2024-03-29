@@ -1,0 +1,53 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-image: url('images/background.jpg.avif'); /* Path to your background image */
+    background-size: cover; /* Cover the entire page */
+    background-position: center; /* Center the background image */
+}
+
+
+#products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.product {
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    width: 220px;
+    min-height: 400px; /* Set a minimum height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+.product img {
+    margin-bottom: 10px;
+    border-radius: 5px;
+    width: 100%; /* Make the image fill the container */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 200px; /* Maximum width */
+    max-height: 200px; /* Maximum height, adjust as needed */
+    object-fit: cover; /* Cover the area without losing aspect ratio */
+}
+
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
